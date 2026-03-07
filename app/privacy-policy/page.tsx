@@ -146,7 +146,7 @@ export default function PrivacyPolicy() {
             </div>
 
             {/* Hero Header */}
-            <header className="relative pt-20 pb-16 px-6 text-center border-b border-white/[0.06]">
+            <header className="relative pt-20 pb-16 px-6 text-center border-white/[0.06]">
                 <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.10] rounded-full px-4 py-1.5 text-xs text-cyan-300 font-medium mb-6 tracking-widest uppercase">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse inline-block" />
                     Legal Document
@@ -162,7 +162,7 @@ export default function PrivacyPolicy() {
                 </p>
 
                 {/* Highlight pills */}
-                <div className="flex flex-wrap justify-center gap-3 mt-8">
+                {/* <div className="flex flex-wrap justify-center gap-3 mt-8">
                     {highlights.map((h) => (
                         <div
                             key={h.label}
@@ -172,11 +172,11 @@ export default function PrivacyPolicy() {
                             {h.label}
                         </div>
                     ))}
-                </div>
+                </div> */}
             </header>
 
             {/* Main content */}
-            <main className="max-w-4xl mx-auto px-6 py-16 space-y-8">
+            <main className="max-w-4xl mx-auto px-6 pb-16 space-y-8">
                 {/* Sections */}
                 {sections.map((section) => (
                     <section
@@ -222,7 +222,7 @@ export default function PrivacyPolicy() {
                 ))}
 
                 {/* Contact card */}
-                <section
+                {/* <section
                     id="contact"
                     className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-900/20 to-blue-900/10 backdrop-blur-sm p-8 text-center"
                 >
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
                             ✉️ support@drema.com
                         </a>
                     </div>
-                </section>
+                </section> */}
             </main>
 
             {/* Footer strip */}
@@ -254,6 +254,13 @@ export default function PrivacyPolicy() {
                     className="hover:text-white/60 transition-colors underline underline-offset-2"
                 >
                     User Agreement
+                </a>
+
+                <a
+                    href="/delete-account"
+                    className="hover:text-white/60 transition-colors underline underline-offset-2"
+                >
+                    Delete Account
                 </a>
             </footer>
         </div>

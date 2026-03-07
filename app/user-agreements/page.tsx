@@ -197,7 +197,7 @@ export default function UserAgreements() {
                 ))}
 
                 {/* Contact card */}
-                <section
+                {/* <section
                     id="contact"
                     className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-purple-900/10 backdrop-blur-sm p-8 text-center"
                 >
@@ -214,7 +214,7 @@ export default function UserAgreements() {
                     >
                         support@drema.com
                     </a>
-                </section>
+                </section> */}
             </main>
 
             {/* Footer strip */}
@@ -222,6 +222,9 @@ export default function UserAgreements() {
                 © {new Date().getFullYear()} Drema. All rights reserved. &nbsp;·&nbsp;
                 <a href="/privacy-policy" className="hover:text-white/60 transition-colors underline underline-offset-2">
                     Privacy Policy
+                </a>
+                <a href="/delete-account" className="hover:text-white/60 transition-colors underline underline-offset-2">
+                    Delete Account
                 </a>
             </footer>
         </div>
