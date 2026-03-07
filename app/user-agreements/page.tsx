@@ -139,7 +139,7 @@ export default function UserAgreements() {
             </div>
 
             {/* Hero Header */}
-            <header className="relative pt-20 pb-16 px-6 text-center border-b border-white/[0.06]">
+            <header className="relative pt-20 pb-16 px-6 text-center ">
                 <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.10] rounded-full px-4 py-1.5 text-xs text-purple-300 font-medium mb-6 tracking-widest uppercase">
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse inline-block" />
                     Legal Document
@@ -154,7 +154,7 @@ export default function UserAgreements() {
             </header>
 
             {/* Main content */}
-            <main className="max-w-4xl mx-auto px-6 py-16 space-y-8">
+            <main className="max-w-4xl mx-auto px-6 pb-16 space-y-8">
                 {/* Intro card */}
                 <div className="relative rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-blue-900/10 backdrop-blur-sm p-6">
                     <p className="text-white/70 leading-relaxed text-sm">
@@ -223,6 +223,7 @@ export default function UserAgreements() {
                 <a href="/privacy-policy" className="hover:text-white/60 transition-colors underline underline-offset-2">
                     Privacy Policy
                 </a>
+                 &nbsp;·&nbsp;
                 <a href="/delete-account" className="hover:text-white/60 transition-colors underline underline-offset-2">
                     Delete Account
                 </a>

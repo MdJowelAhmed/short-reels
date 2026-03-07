@@ -255,7 +255,7 @@ export default function PrivacyPolicy() {
                 >
                     User Agreement
                 </a>
-
+ &nbsp;·&nbsp;
                 <a
                     href="/delete-account"
                     className="hover:text-white/60 transition-colors underline underline-offset-2"

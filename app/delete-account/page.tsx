@@ -100,7 +100,7 @@ export default function DeleteAccount() {
             </div>
 
             {/* Hero Header */}
-            <header className="relative pt-20 pb-16 px-6 text-center border-b border-white/[0.06]">
+            <header className="relative pt-20 pb-16 px-6 text-center ">
                 <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-1.5 text-xs text-red-300 font-medium mb-6 tracking-widest uppercase">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse inline-block" />
                     Irreversible Action
@@ -115,7 +115,7 @@ export default function DeleteAccount() {
                 </p>
             </header>
 
-            <main className="max-w-5xl mx-auto px-6 py-16 space-y-10">
+            <main className="max-w-5xl mx-auto px-6 pb-16 space-y-10">
 
                 {/* Warning banner */}
                 <div className="rounded-2xl border border-red-500/30 bg-red-500/10 backdrop-blur-sm p-6 flex gap-4 items-start">
