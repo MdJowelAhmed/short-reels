@@ -133,9 +133,16 @@ export default function PrivacyPolicy() {
         <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white relative overflow-hidden">
             {/* Ambient background orbs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-[#e94560]/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#ff6b6b]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e94560]/5 rounded-full blur-3xl animate-pulse" />
+                {/* top-left */}
+                <div className="absolute top-20 left-10 w-72 h-72 bg-[#e94560]/10 rounded-full blur-3xl animate-float" />
+                {/* bottom-right */}
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#ff6b6b]/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+                {/* center glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e94560]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+                {/* top — a bit below the top edge */}
+                <div className="absolute top-[12%] left-1/2 -translate-x-1/2 w-80 h-80 bg-[#ff6b6b]/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '0.8s' }} />
+                {/* left side — mid height */}
+                <div className="absolute top-[45%] -left-16 w-72 h-72 bg-[#e94560]/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2.2s' }} />
             </div>
 
             {/* Hero Header */}
