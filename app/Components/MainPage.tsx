@@ -2,68 +2,56 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-// import { PlayIcon } from '@/components/icons/PlayIcon';
-// import { AndroidIcon } from '@/components/icons/AndroidIcon';
-// import { AppleIcon } from '@/components/icons/AppleIcon';
 
 export default function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
-    // Get video ID from URL path
     const pathParts = window.location.pathname.split('/');
     const videoId = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
 
-    // Custom scheme URL for the app
     const appSchemeUrl = `creepyshorts://shorts/${videoId}`;
 
-    // Store URLs
-    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.victorsaulmendozamena.creepyshorts';
+    const playStoreUrl =
+      'https://play.google.com/store/apps/details?id=com.victorsaulmendozamena.creepyshorts';
 
-    // Detect platform
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
     const isAndroid = /android/i.test(userAgent);
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
+    // const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
 
-    // Try to open app
     const tryOpenApp = () => {
       const startTime = Date.now();
 
-      // Create hidden iframe to attempt app open (for older browsers)
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       iframe.src = appSchemeUrl;
       document.body.appendChild(iframe);
 
-      // Also try direct location change (for newer browsers)
       setTimeout(() => {
         window.location.href = appSchemeUrl;
       }, 100);
 
-      // Check if app opened
       setTimeout(() => {
         const elapsed = Date.now() - startTime;
 
-        // If we're still here after 2.5 seconds, the app probably didn't open
         if (elapsed < 3000 && document.visibilityState === 'visible') {
           setIsLoading(false);
           setShowFallback(true);
 
-          // Auto-redirect to store based on platform
           if (isAndroid) {
-            // For Android, try intent URL
-            window.location.href = `intent://shorts/${videoId}#Intent;scheme=creepyshorts;package=com.victorsaulmendozamena.creepyshorts;S.browser_fallback_url=${encodeURIComponent(playStoreUrl)};end`;
+            window.location.href = `intent://shorts/${videoId}#Intent;scheme=creepyshorts;package=com.victorsaulmendozamena.creepyshorts;S.browser_fallback_url=${encodeURIComponent(
+              playStoreUrl
+            )};end`;
           }
         }
       }, 2500);
     };
 
-    // Start app open attempt
     tryOpenApp();
 
-    // Show fallback after animation delay
     const fallbackTimer = setTimeout(() => {
+      setIsLoading(false);
       setShowFallback(true);
     }, 2000);
 
@@ -73,79 +61,255 @@ export default function MainPage() {
   }, []);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#e94560]/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#ff6b6b]/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e94560]/5 rounded-full blur-3xl animate-pulse"></div>
+    <main className="relative min-h-screen w-full overflow-hidden bg-[#070709] font-sans text-white antialiased">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1a1a24] opacity-40 blur-[120px]" />
+        <div className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#11111a] opacity-60 blur-[100px]" />
       </div>
 
-      <div className="container max-w-md mx-auto px-6 py-16 text-center relative z-10">
-        {/* Logo */}
-        <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-[#e94560] to-[#ff6b6b] rounded-[28px] flex items-center justify-center shadow-2xl shadow-[#e94560]/30 animate-glow">
-          {/* <PlayIcon className="w-16 h-16 text-white" /> */}
-          <Image src="/logoText.png" alt="Creepy Shorts Logo" width={100} height={100} />
+      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-10">
+        {/* Card */}
+        <div className="w-full max-w-[420px] h-[520px] rounded-[28px] border border-white/[0.06] bg-gradient-to-b from-[#15151c] to-[#0d0d12] p-8 shadow-2xl sm:p-9">
+          {/* Logo Icon */}
+          <div className="mx-auto mb-7 flex h-[72px] w-[72px] items-center justify-center rounded-[18px] border border-white/[0.08] bg-gradient-to-br from-[#1c1c25] to-[#101015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.5)]">
+            {/* <GhostIcon className="h-9 w-9 text-white/95" /> */}
+            <Image src="/logo1.png" alt="Logo" width={72} height={72} />
+          </div>
+
+          {/* Badge */}
+          <div className="mb-5 flex justify-center">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.07] bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
+              <BoltIcon className="h-3 w-3" />
+              HorrorStories App
+            </span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-center text-[34px] font-bold leading-tight tracking-tight text-white">
+            Creepy Shorts
+          </h1>
+
+          {/* Subtitle */}
+          <p className="mx-auto mt-3 max-w-[280px] text-center text-[14px] leading-relaxed text-white/55">
+            {isLoading
+              ? 'Opening the video in Creepy Shorts app...'
+              : 'Experience immersive short horror stories anytime, anywhere.'}
+          </p>
+
+          {/* Loading indicator */}
+          {isLoading && (
+            <div className="mt-5 flex items-center justify-center gap-2 text-[12px] text-white/50">
+              <span className="h-3 w-3 animate-spin rounded-full border-2 border-white/15 border-t-white/70" />
+              <span>Redirecting to app...</span>
+            </div>
+          )}
+
+          {/* Download Buttons */}
+          <div
+            className={`mt-8 flex flex-col gap-3 transition-all duration-500 ${
+              showFallback ? 'opacity-100 translate-y-0' : 'opacity-90 translate-y-1'
+            }`}
+          >
+            <StoreButton
+              href="https://play.google.com/store/apps/details?id=com.rubengalindo.creepyshorts&hl=en"
+              caption="Get it on"
+              label="Download for Android"
+              icon={<PlayIcon className="h-[18px] w-[18px] text-white" />}
+            />
+
+            <StoreButton
+              href="https://apps.apple.com/us/app/creepy-shorts/id6758427319"
+              caption="Download on the"
+              label="Download for iPhone"
+              icon={<AppleIcon className="h-[18px] w-[18px] text-white" />}
+            />
+          </div>
+
+         
+
+          
         </div>
 
-        {/* Title */}
-        <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent font-display tracking-tight">
-          Creepy Shorts
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-lg text-white/70 mb-12 leading-relaxed">
-          Opening the video in Creepy Shorts app...
+        {/* Footer */}
+        <p className="mt-7 text-center text-[10px] font-medium uppercase tracking-[0.28em] text-white mt-40">
+          <span className="mr-2">·</span>© 2026 Creepy Shorts
         </p>
-
-        {/* Loading indicator */}
-        {isLoading && (
-          <div className="flex items-center justify-center gap-3 mb-10 text-white/80 animate-fade-in">
-            <div className="w-6 h-6 border-3 border-white/20 border-t-[#e94560] rounded-full animate-spin"></div>
-            <span className="font-medium">Redirecting to app...</span>
-          </div>
-        )}
-
-        {/* Fallback content */}
-        <div 
-          className={`transition-all duration-500 ${
-            showFallback ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-          }`}
-        >
-          <div className="flex items-center gap-4 my-8 text-white/40 text-sm">
-            <div className="flex-1 h-px bg-white/20"></div>
-            <span className="font-medium">App not installed?</span>
-            <div className="flex-1 h-px bg-white/20"></div>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {/* Play Store Button */}
-            <a
-              href="https://play.google.com/store/apps/details?id=com.victorsaulmendozamena.creepyshorts"
-              className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#34a853] to-[#1e7e34] rounded-2xl text-white font-semibold text-base shadow-lg shadow-green-900/30 hover:shadow-xl hover:shadow-green-900/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* <AndroidIcon className="w-6 h-6" /> */}
-              <Image src="/google.png" alt="Google Play Store" width={36} height={36} className='rounded-full'/>
-              <span>Download from Play Store</span>
-            </a>
-
-            {/* App Store Button */}
-            <a
-              href="https://apps.apple.com/app/idYOUR_APP_STORE_ID"
-              className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#333] to-[#000] rounded-2xl text-white font-semibold text-base shadow-lg shadow-black/50 hover:shadow-xl hover:shadow-black/70 hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* <AppleIcon className="w-6 h-6" /> */}
-                <Image src="/apple.png" alt="Apple App Store" width={36} height={36} className='rounded-full'/>
-              <span>Download from App Store</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Footer hint */}
-        <div className="mt-16 text-white/30 text-sm">
-          <p>Experience thrilling short videos</p>
-        </div>
       </div>
     </main>
+  );
+}
+
+/* ----------------------------- Sub Components ----------------------------- */
+
+function StoreButton({
+  href,
+  caption,
+  label,
+  icon,
+}: {
+  href: string;
+  caption: string;
+  label: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative flex items-center gap-3 rounded-2xl border border-white/[0.07] bg-gradient-to-b from-[#1a1a22] to-[#101016] px-4 py-3 transition-all duration-300 hover:border-white/15 hover:from-[#20202a] hover:to-[#15151c]"
+    >
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-[#0a0a10] shadow-inner">
+        {icon}
+      </span>
+
+      <span className="flex flex-col leading-tight">
+        <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-white/45">
+          {caption}
+        </span>
+        <span className="text-[15px] font-semibold text-white">{label}</span>
+      </span>
+
+      <ArrowUpRightIcon className="ml-auto h-4 w-4 text-white/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white/80" />
+    </a>
+  );
+}
+
+function FeaturePill({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="flex items-center justify-center gap-1.5 rounded-full border border-white/[0.07] bg-white/[0.03] px-3 py-2 text-[11px] font-medium text-white/70">
+      <span className="text-white/55">{icon}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+/* --------------------------------- Icons --------------------------------- */
+
+function GhostIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M12 2.5c-4.4 0-8 3.6-8 8v9.2c0 .9 1 1.5 1.8 1l1.6-1c.3-.2.6-.2.9 0l1.6 1c.3.2.6.2.9 0l1.6-1c.3-.2.6-.2.9 0l1.6 1c.3.2.6.2.9 0l1.6-1c.8-.5 1.8.1 1.8 1V10.5c0-4.4-3.6-8-8-8Z"
+        fill="currentColor"
+      />
+      <circle cx="9.5" cy="11" r="1.3" fill="#0a0a10" />
+      <circle cx="14.5" cy="11" r="1.3" fill="#0a0a10" />
+    </svg>
+  );
+}
+
+function BoltIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+    </svg>
+  );
+}
+
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M8 5.5v13c0 .8.9 1.3 1.6.9l10.4-6.5c.7-.4.7-1.4 0-1.8L9.6 4.6c-.7-.4-1.6.1-1.6.9Z" />
+    </svg>
+  );
+}
+
+function AppleIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.7 1.2 10.2.9 1.2 1.9 2.6 3.2 2.5 1.3 0 1.8-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.2 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.8-4Zm-2.5-7.4c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.9-1.4Z" />
+    </svg>
+  );
+}
+
+function ArrowUpRightIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
+    </svg>
+  );
+}
+
+function BookIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5v-13Z" />
+      <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20" />
+    </svg>
+  );
+}
+
+function MoonIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+    </svg>
+  );
+}
+
+function MicIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="9" y="2" width="6" height="12" rx="3" />
+      <path d="M19 10a7 7 0 0 1-14 0" />
+      <path d="M12 19v3" />
+    </svg>
+  );
+}
+
+function ClockIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
   );
 }
