@@ -74,7 +74,7 @@ export default function MainPage() {
           {/* Logo Icon */}
           <div className="mx-auto mb-7 flex h-[72px] w-[72px] items-center justify-center rounded-[18px] border border-white/[0.08] bg-gradient-to-br from-[#1c1c25] to-[#101015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.5)]">
             {/* <GhostIcon className="h-9 w-9 text-white/95" /> */}
-            <Image src="/logo.png" alt="Logo" width={74} height={74} />
+            <Image src="/logo/kishor.png" alt="Logo" width={74} height={74} />
           </div>
 
           {/* Badge */}
